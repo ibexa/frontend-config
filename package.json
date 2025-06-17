@@ -1,0 +1,16 @@
+{
+    "name": "@ibexa/frontend-config",
+    "packageManager": "yarn@1.22.22",
+    "version": "5.0.0-beta1",
+    "repository": "git@github.com:ibexa/frontend-config.git",
+    "author": "Michał Grabowski <michal.grabowski@ibexa.co>",
+    "exports": {
+        "./dev/enable-symlinks": "./enable.symlinks.js",
+        "./webpack-config": "./ibexa.webpack.config.js",
+        "./webpack-config/manager": "./ibexa.webpack.config.manager.js",
+        "./webpack-config/custom": "./ibexa.webpack.custom.configs.js"
+    },
+    "dependencies": {
+        "module-alias": "^2.2.3"
+    }
+}
