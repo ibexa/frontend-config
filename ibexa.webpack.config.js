@@ -2,10 +2,9 @@ const path = require('path');
 
 const ibexaConfigManager = require('./ibexa.webpack.config.manager.js');
 
-const fullEncoreDir = path.resolve(process.cwd(), 'var/encore');
-const configBundlesPath = path.resolve(fullEncoreDir, 'ibexa.config.js');
-const configManagerPath = path.resolve(fullEncoreDir, 'ibexa.config.manager.js');
-const configSetupsPath = path.resolve(fullEncoreDir, 'ibexa.config.setup.js');
+const configBundlesPath = path.resolve('var/encore/ibexa.config.js');
+const configManagerPath = path.resolve('var/encore/ibexa.config.manager.js');
+const configSetupsPath = path.resolve('var/encore/ibexa.config.setup.js');
 const bundles = require(configBundlesPath);
 const configManagers = require(configManagerPath);
 const configSetups = require(configSetupsPath);
@@ -25,7 +24,7 @@ module.exports = (Encore, modifyEncoreConfig, modifyOutputConfig) => {
         })
         .enableSassLoader()
         .enableTypeScriptLoader((tsConfig) => {
-            tsConfig.configFile = path.resolve(process.cwd(), 'tsconfig.json');
+            tsConfig.configFile = path.resolve('tsconfig.json');
         })
         .enableForkedTypeScriptTypesChecking((tsConfig) => {
             tsConfig.async = true;
@@ -34,13 +33,13 @@ module.exports = (Encore, modifyEncoreConfig, modifyOutputConfig) => {
         .enableSingleRuntimeChunk();
 
     configSetups.forEach((configSetupPath) => {
-        const setupConfig = require(path.resolve(process.cwd(), configSetupPath));
+        const setupConfig = require(path.resolve(configSetupPath));
 
         setupConfig(Encore);
     });
 
     bundles.forEach((configPath) => {
-        const addEntries = require(path.resolve(process.cwd(), configPath));
+        const addEntries = require(path.resolve(configPath));
 
         addEntries(Encore);
     });
@@ -57,7 +56,7 @@ module.exports = (Encore, modifyEncoreConfig, modifyOutputConfig) => {
     ibexaConfig.module.rules[1].oneOf[1].use[1].options.url = false;
 
     configManagers.forEach((configManagerPath) => {
-        const configManager = require(path.resolve(process.cwd(), configManagerPath));
+        const configManager = require(path.resolve(configManagerPath));
 
         configManager(ibexaConfig, ibexaConfigManager);
     });

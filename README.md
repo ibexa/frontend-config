@@ -1,5 +1,38 @@
-Ibexa DXP \<Package name\>
-====================
+# Ibexa DXP Frontend Config
+
+## Usage
+This JS package should be used only with Ibexa DXP from root directory - for proper functioning it requires specific files structure provided by Ibexa DXP.
+
+## Webpack
+### Ibexa config
+Usage:
+```
+const Encore = require('@symfony/webpack-encore');
+const getIbexaConfig = require('@ibexa/frontend-config/webpack-config');
+const ibexaConfig = getIbexaConfig(Encore, [modifyEncoreConfig], [modifyOutputConfig]);
+```
+Optional arguments:
+`modifyEncoreConfig(Encore)`: function that takes Encore object and allows modifying its config, executes just before `Encore.getWebpackConfig()`;
+`modifyOutputConfig(ibexaConfig)`: function that takes raw ibexaConfig object and allows modifying its config, executes just before return;
+
+### Custom config
+Usage:
+```
+const customConfigs = require('@ibexa/frontend-config/webpack-config/custom');
+```
+
+## Dev
+### Symlinks
+If you use symlinked Ibexa bundles for development purposes, you need to adjust nodeJS and webpack environment.
+Usage:
+```
+const enableWebpackSymlinks = require('@ibexa/frontend-config/dev/enable-symlinks');
+
+const ibexaConfig = getIbexaConfig(Encore, null, enableWebpackSymlinks);
+```
+`enableWebpackSymlinks(ibexaConfig)` takes one argument - raw ibexaConfig object and adds to webpack additional resolver for modules - `node_modules` directory from root Ibexa DXP directory;
+`require('@ibexa/frontend-config/dev/enable-symlinks')` adds additional resolver for modules - `node_modules` directory from root Ibexa DXP directory out of the box.
+Warning - use this feature with caution only for development purposes! It modifies nodeJS default module resolution behavior on runtime which may lead to unexpected module loading if not configured carefully.
 
 ## COPYRIGHT
 Copyright (C) 1999-2025 Ibexa AS (formerly eZ Systems AS). All rights reserved.
