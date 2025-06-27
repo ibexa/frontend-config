@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = (Encore, customConfigs) => customConfigs.reduce((configs, customConfigPath) => {
     let customConfig = require(path.resolve(customConfigPath));
 
