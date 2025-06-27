@@ -2,14 +2,7 @@ const path = require('path');
 
 const ibexaConfigManager = require('./ibexa.webpack.config.manager.js');
 
-const configBundlesPath = path.resolve('var/encore/ibexa.config.js');
-const configManagerPath = path.resolve('var/encore/ibexa.config.manager.js');
-const configSetupsPath = path.resolve('var/encore/ibexa.config.setup.js');
-const bundles = require(configBundlesPath);
-const configManagers = require(configManagerPath);
-const configSetups = require(configSetupsPath);
-
-module.exports = (Encore, modifyEncoreConfig, modifyOutputConfig) => {
+module.exports = (Encore, { bundles, managers, setups }, modifyEncoreConfig) => {
     process.env.NODE_ENV ??= Encore.isProduction() ? 'production' : 'development';
 
     Encore.setOutputPath('public/assets/ibexa/build')
@@ -32,7 +25,7 @@ module.exports = (Encore, modifyEncoreConfig, modifyOutputConfig) => {
         .enableReactPreset()
         .enableSingleRuntimeChunk();
 
-    configSetups.forEach((configSetupPath) => {
+    setups.forEach((configSetupPath) => {
         const setupConfig = require(path.resolve(configSetupPath));
 
         setupConfig(Encore);
@@ -55,15 +48,11 @@ module.exports = (Encore, modifyEncoreConfig, modifyOutputConfig) => {
     ibexaConfig.module.rules[4].oneOf[1].use[1].options.url = false;
     ibexaConfig.module.rules[1].oneOf[1].use[1].options.url = false;
 
-    configManagers.forEach((configManagerPath) => {
+    managers.forEach((configManagerPath) => {
         const configManager = require(path.resolve(configManagerPath));
 
         configManager(ibexaConfig, ibexaConfigManager);
     });
-
-    if (typeof modifyOutputConfig === 'function') {
-        modifyOutputConfig(ibexaConfig);
-    }
 
     Encore.reset();
 
