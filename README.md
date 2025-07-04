@@ -1,5 +1,35 @@
-Ibexa DXP \<Package name\>
-====================
+# Ibexa DXP Frontend Config
+
+## Usage
+This JS package should be used only with Ibexa DXP from root directory - for proper functioning it requires specific files structure provided by Ibexa DXP.
+
+## Webpack
+### Ibexa config
+Usage:
+```
+const Encore = require('@symfony/webpack-encore');
+const getIbexaConfig = require('@ibexa/frontend-config/webpack-config');
+
+const bundles = require('./var/encore/ibexa.config.js');
+const managers = require('./var/encore/ibexa.config.manager.js');
+const setups = require('./var/encore/ibexa.config.setup.js');
+
+const ibexaConfig = getIbexaConfig(Encore, { bundles, managers, setups }, modifyEncoreConfig);
+```
+Optional arguments:
+
+`modifyEncoreConfig(Encore)`: function that takes Encore object and allows modifying its config, executes just before `Encore.getWebpackConfig()`;
+
+### Custom config
+Usage:
+```
+const Encore = require('@symfony/webpack-encore');
+const getCustomConfigs = require('@ibexa/frontend-config/webpack-config/custom');
+
+const customConfigsPaths = require('./var/encore/ibexa.webpack.custom.config.js');
+
+const customConfigs = getCustomConfigs(Encore, customConfigsPaths);
+```
 
 ## COPYRIGHT
 Copyright (C) 1999-2025 Ibexa AS (formerly eZ Systems AS). All rights reserved.
