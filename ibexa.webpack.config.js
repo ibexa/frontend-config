@@ -22,7 +22,9 @@ module.exports = (Encore, { bundles, managers, setups }, modifyEncoreConfig) => 
         .enableForkedTypeScriptTypesChecking((tsConfig) => {
             tsConfig.async = true;
         })
-        .enableReactPreset()
+        .enableReactPreset((options) => {
+            options.runtime = 'classic';
+        })
         .enableSingleRuntimeChunk();
 
     setups.forEach((configSetupPath) => {
