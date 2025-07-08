@@ -1,11 +1,16 @@
+const Encore = require('@symfony/webpack-encore');
 const path = require('path');
+const ibexaConfigManager = require('@ibexa/frontend-config/webpack-config/manager');
 
-const ibexaConfigManager = require('./ibexa.webpack.config.manager.js');
+module.exports = (modifyEncoreConfig) => {
+    const bundles = require(path.resolve('./var/encore/ibexa.config.js'));
+    const managers = require(path.resolve('./var/encore/ibexa.config.manager.js'));
+    const setups = require(path.resolve('./var/encore/ibexa.config.setup.js'));
 
-module.exports = (Encore, { bundles, managers, setups }, modifyEncoreConfig) => {
     process.env.NODE_ENV ??= Encore.isProduction() ? 'production' : 'development';
 
-    Encore.setOutputPath('public/assets/ibexa/build')
+    Encore
+        .setOutputPath('public/assets/ibexa/build')
         .setPublicPath('/assets/ibexa/build')
         .addExternals({
             react: 'React',

@@ -3,9 +3,16 @@
     "packageManager": "yarn@1.22.22",
     "version": "5.0.0-beta1",
     "repository": "git@github.com:ibexa/frontend-config.git",
+    "devDependencies": {
+        "@symfony/webpack-encore": "^5.1.0"
+    },
     "exports": {
-        "./webpack-config": "./ibexa.webpack.config.js",
+        "./webpack-config/all": "./ibexa.webpack.all.configs.js",
+        "./webpack-config/ibexa": "./ibexa.webpack.ibexa.configs.js",
+        "./webpack-config/internals": "./ibexa.webpack.internals.configs.js",
+        "./webpack-config/libs": "./ibexa.webpack.libs.configs.js",
+        "./webpack-config/richtext": "./ibexa.webpack.richtext.configs.js",
         "./webpack-config/manager": "./ibexa.webpack.config.manager.js",
-        "./webpack-config/custom": "./ibexa.webpack.custom.configs.js"
+        "./webpack-config/get-configs": "./ibexa.webpack.configs.js"
     }
 }
