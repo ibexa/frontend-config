@@ -1,7 +1,7 @@
 {
     "name": "@ibexa/frontend-config",
     "packageManager": "yarn@1.22.22",
-    "version": "5.0.0-beta1",
+    "version": "5.0.0-rc1",
     "repository": "git@github.com:ibexa/frontend-config.git",
     "exports": {
         "./webpack-config": "./ibexa.webpack.config.js",
