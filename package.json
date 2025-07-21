@@ -1,7 +1,7 @@
 {
     "name": "@ibexa/frontend-config",
     "packageManager": "yarn@1.22.22",
-    "version": "5.0.0-rc1",
+    "version": "5.0.0",
     "repository": "git@github.com:ibexa/frontend-config.git",
     "devDependencies": {
         "@symfony/webpack-encore": "^5.1.0"
