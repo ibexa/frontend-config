@@ -31,6 +31,17 @@ const customConfigsPaths = require('./var/encore/ibexa.webpack.custom.config.js'
 const customConfigs = getCustomConfigs(Encore, customConfigsPaths);
 ```
 
+## Helpers
+### getIbexaBundleFilepath
+Usage:
+```
+const getIbexaBundleFilepath = require('@ibexa/frontend-config/helpers/get-bundle-filepath');
+
+Encore.addEntry('bundle-entry-js', [
+    getIbexaBundleFilepath('admin-ui/src/bundle/Resources/public/js/scripts/helpers/browser.helper.js'),
+]);
+```
+
 ## COPYRIGHT
 Copyright (C) 1999-2025 Ibexa AS (formerly eZ Systems AS). All rights reserved.
 
