@@ -1,12 +1,13 @@
 {
     "name": "@ibexa/frontend-config",
     "packageManager": "yarn@1.22.22",
-    "version": "5.0.0",
+    "version": "5.0.1",
     "repository": "git@github.com:ibexa/frontend-config.git",
     "devDependencies": {
         "@symfony/webpack-encore": "^5.1.0"
     },
     "exports": {
+        "./helpers/get-ibexa-bundle-filepath": "./src/getIbexaBundleFilepath.js",
         "./webpack-config/all": "./ibexa.webpack.all.configs.js",
         "./webpack-config/ibexa": "./ibexa.webpack.ibexa.configs.js",
         "./webpack-config/internals": "./ibexa.webpack.internals.configs.js",
