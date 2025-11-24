@@ -23,9 +23,7 @@ module.exports = (modifyEncoreConfig) => {
         .enableSassLoader()
         .enableTypeScriptLoader((tsConfig) => {
             tsConfig.configFile = path.resolve('tsconfig.json');
-        })
-        .enableForkedTypeScriptTypesChecking((tsConfig) => {
-            tsConfig.async = true;
+            tsConfig.onlyCompileBundledFiles = true;
         })
         .enableReactPreset((options) => {
             options.runtime = 'classic';
