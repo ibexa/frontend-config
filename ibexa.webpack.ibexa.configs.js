@@ -1,6 +1,7 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
 const ibexaConfigManager = require('@ibexa/frontend-config/webpack-config/manager');
+const IbexaRtlCssPlugin = require('@ibexa/frontend-config/ibexa-rtlcss-plugin');
 
 module.exports = (modifyEncoreConfig) => {
     const bundles = require(path.resolve('./var/encore/ibexa.config.js'));
@@ -52,6 +53,7 @@ module.exports = (modifyEncoreConfig) => {
 
     ibexaConfig.module.rules[4].oneOf[1].use[1].options.url = false;
     ibexaConfig.module.rules[1].oneOf[1].use[1].options.url = false;
+    ibexaConfig.plugins.push(IbexaRtlCssPlugin('public/assets/ibexa/build'));
 
     managers.forEach((configManagerPath) => {
         const configManager = require(path.resolve(configManagerPath));
