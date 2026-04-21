@@ -1,13 +1,15 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
 const ibexaConfigManager = require('@ibexa/frontend-config/webpack-config/manager');
-const IbexaRtlCssPlugin = require('@ibexa/frontend-config/ibexa-rtlcss-plugin');
+const IbexaRtlCssPlugin = require('./src/ibexa.encore.rtlcss.plugin');
 
 module.exports = (modifyEncoreConfig) => {
     const bundles = require(path.resolve('./var/encore/ibexa.config.js'));
     const managers = require(path.resolve('./var/encore/ibexa.config.manager.js'));
     const setups = require(path.resolve('./var/encore/ibexa.config.setup.js'));
     const rtlConfigs = require(path.resolve('./var/encore/ibexa.rtl.config.js'));
+
+    console.log(process);
 
     process.env.NODE_ENV ??= Encore.isProduction() ? 'production' : 'development';
 
