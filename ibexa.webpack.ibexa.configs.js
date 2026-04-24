@@ -1,11 +1,14 @@
 const Encore = require('@symfony/webpack-encore');
 const path = require('path');
 const ibexaConfigManager = require('@ibexa/frontend-config/webpack-config/manager');
+const IbexaRtlCssPlugin = require('@ibexa/frontend-config/rtl/ibexa-webpack-plugin');
 
-module.exports = (modifyEncoreConfig) => {
+module.exports = (env = {}) => {
+    const BUILD_RTL_CSS = !!(env['build-rtl-css'] || false);
     const bundles = require(path.resolve('./var/encore/ibexa.config.js'));
     const managers = require(path.resolve('./var/encore/ibexa.config.manager.js'));
     const setups = require(path.resolve('./var/encore/ibexa.config.setup.js'));
+    const rtlConfigs = require(path.resolve('./var/encore/ibexa.rtl.config.js'));
 
     process.env.NODE_ENV ??= Encore.isProduction() ? 'production' : 'development';
 
@@ -30,6 +33,10 @@ module.exports = (modifyEncoreConfig) => {
         })
         .enableSingleRuntimeChunk();
 
+    if (BUILD_RTL_CSS) {
+        Encore.addPlugin(IbexaRtlCssPlugin({ rtlConfigs }));
+    }
+
     setups.forEach((configSetupPath) => {
         const setupConfig = require(path.resolve(configSetupPath));
 
@@ -42,8 +49,8 @@ module.exports = (modifyEncoreConfig) => {
         addEntries(Encore);
     });
 
-    if (typeof modifyEncoreConfig === 'function') {
-        modifyEncoreConfig(Encore);
+    if (typeof env === 'function') {
+        env(Encore);
     }
 
     const ibexaConfig = Encore.getWebpackConfig();
