@@ -8,6 +8,7 @@
     },
     "exports": {
         "./helpers/get-ibexa-bundle-filepath": "./src/getIbexaBundleFilepath.js",
+        "./helpers/encore": "./src/encore.js",
         "./webpack-config/all": "./ibexa.webpack.all.configs.js",
         "./webpack-config/ibexa": "./ibexa.webpack.ibexa.configs.js",
         "./webpack-config/internals": "./ibexa.webpack.internals.configs.js",
