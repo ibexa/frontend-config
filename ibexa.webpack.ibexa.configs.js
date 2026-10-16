@@ -1,5 +1,5 @@
-const Encore = require('@symfony/webpack-encore');
 const path = require('path');
+const { Encore, whenConfigReady } = require('@ibexa/frontend-config/helpers/encore');
 const ibexaConfigManager = require('@ibexa/frontend-config/webpack-config/manager');
 
 module.exports = (modifyEncoreConfig) => {
@@ -46,17 +46,19 @@ module.exports = (modifyEncoreConfig) => {
         modifyEncoreConfig(Encore);
     }
 
-    const ibexaConfig = Encore.getWebpackConfig();
+    const ibexaConfig = whenConfigReady(Encore.getWebpackConfig(), (config) => {
+        config.name = 'ibexa';
 
-    ibexaConfig.name = 'ibexa';
+        config.module.rules[4].oneOf[1].use[1].options.url = false;
+        config.module.rules[1].oneOf[1].use[1].options.url = false;
 
-    ibexaConfig.module.rules[4].oneOf[1].use[1].options.url = false;
-    ibexaConfig.module.rules[1].oneOf[1].use[1].options.url = false;
+        managers.forEach((configManagerPath) => {
+            const configManager = require(path.resolve(configManagerPath));
 
-    managers.forEach((configManagerPath) => {
-        const configManager = require(path.resolve(configManagerPath));
+            configManager(config, ibexaConfigManager);
+        });
 
-        configManager(ibexaConfig, ibexaConfigManager);
+        return config;
     });
 
     Encore.reset();
