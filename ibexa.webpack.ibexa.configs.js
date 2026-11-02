@@ -22,7 +22,7 @@ module.exports = (modifyEncoreConfig) => {
         })
         .enableSassLoader()
         .enableTypeScriptLoader((tsConfig) => {
-            tsConfig.configFile = path.resolve('tsconfig.json');
+            tsConfig.configFile = path.resolve('tsconfig.ibexa.json');
             tsConfig.onlyCompileBundledFiles = true;
         })
         .enableReactPreset((options) => {
