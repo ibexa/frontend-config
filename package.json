@@ -8,6 +8,9 @@
     },
     "exports": {
         "./helpers/get-ibexa-bundle-filepath": "./src/getIbexaBundleFilepath.js",
+        "./rtl/ibexa-cli-build": "./ibexa.cli.rtlcss.build.js",
+        "./rtl/ibexa-webpack-plugin": "./ibexa.webpack.rtlcss.plugin.js",
+        "./rtl/core-rtlcss-plugin": "./src/core.rtlcss.plugin.js",
         "./webpack-config/all": "./ibexa.webpack.all.configs.js",
         "./webpack-config/ibexa": "./ibexa.webpack.ibexa.configs.js",
         "./webpack-config/internals": "./ibexa.webpack.internals.configs.js",
